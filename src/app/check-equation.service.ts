@@ -5,16 +5,17 @@ import { Injectable } from '@angular/core';
 })
 export class CheckEquationService {
 
-  validateAnswer(actualAnswer: number[], userAnswer: number[]) : boolean {
-    if (actualAnswer.length !== userAnswer.length) {
-        return false;
-    }
+  validateAnswer(actualAnswer: number[], userAnswer: number[]) : boolean[] {
+    let ans = [];
+
     for (let i = actualAnswer.length; i--;) {
         if(actualAnswer[i] !== userAnswer[i]) {
-            return false;
+            ans.push(false);
+        } else {
+          ans.push(true);
         }
     }
-    return true;
+    return ans;
   }
 
   constructor() { }
