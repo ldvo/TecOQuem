@@ -27,8 +27,10 @@
         <button (click)="sidenav.toggle()" routerLink="/acerca" routerLinkActive="mat-accent" mat-button>Acerca</button>
       </div>
     </mat-sidenav>
-    <mat-sidenav-content fxFlexFill>
-      <router-outlet></router-outlet>
+    <mat-sidenav-content fxFill fxLayout="row" fxLayoutAlign="center stretch">
+      <div fxLayout="column" fxLayoutGap="10%" fxFlex.xs="0 0 90%" fxFlex.gt-xs="0 0 80%" fxFlex.gt-sm="0 0 70%">
+        <router-outlet></router-outlet>
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
