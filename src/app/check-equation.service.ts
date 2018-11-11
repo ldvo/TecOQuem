@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class CheckEquationService {
 
   validateAnswer(actualAnswer: number[], userAnswer: number[]) : boolean[] {
-    let ans = [];
+    let ans : boolean[] = [];
 
     for (let i = actualAnswer.length; i--;) {
         if(actualAnswer[i] !== userAnswer[i]) {
