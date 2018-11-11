@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatButtonModule, MatCardModule, MatIconModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+// tslint:disable-next-line:max-line-length
+import {MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -10,16 +11,18 @@ import {AppComponent} from './app.component';
 import {EcuacionesComponent} from './ecuaciones/ecuaciones.component';
 import {InicioComponent} from './inicio/inicio.component';
 import {ReaccionesComponent} from './reacciones/reacciones.component';
+import { InicioEcuacionesComponent } from './ecuaciones/inicio-ecuaciones/inicio-ecuaciones.component';
 
 @NgModule({
   declarations: [
     AppComponent, InicioComponent, ReaccionesComponent, EcuacionesComponent,
-    AcercaComponent
+    AcercaComponent,
+    InicioEcuacionesComponent
   ],
   imports: [
-    MatCardModule, BrowserModule, BrowserAnimationsModule, AppRoutingModule,
-    MatToolbarModule, FlexLayoutModule, MatSidenavModule, MatButtonModule,
-    MatIconModule
+    MatInputModule, MatFormFieldModule, MatCardModule, BrowserModule,
+    BrowserAnimationsModule, AppRoutingModule, MatToolbarModule,
+    FlexLayoutModule, MatSidenavModule, MatButtonModule, MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

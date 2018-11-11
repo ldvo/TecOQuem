@@ -1,3 +1,45 @@
-<p>
-  ecuaciones works!
-</p>
+<mat-card>
+  <form fxLayout="column" fxLayoutGap="20px">
+    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px" [ngStyle.xs]="{'font-size': '12px'}"
+      [ngStyle.gt-sm]="{'font-size': '20px'}">
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of game.problems[0].equation1.compounds; index as i; first as isFirstCompound">
+        <div *ngIf="!isFirstCompound"> + </div>
+        <div *ngIf="compound.constant; else inputField">{{compound.constant}}</div>
+        <ng-template #inputField>
+          <mat-form-field fxFlex="0 0 40px">
+            <input matInput type="number" required>
+          </mat-form-field>
+        </ng-template>
+
+        <div fxLayout="row">
+          <div *ngFor="let element of compound.elements">
+            {{element.letter}}
+            <sub *ngIf="element.subscript">{{element.subscript}}</sub>
+          </div>
+        </div>
+
+      </div>
+      <div>⟶</div>
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of game.problems[0].equation2.compounds; index as i; first as isFirstCompound">
+        <div *ngIf="!isFirstCompound"> + </div>
+        <div *ngIf="compound.constant; else inputField">{{compound.constant}}</div>
+        <ng-template #inputField>
+          <mat-form-field fxFlex="0 0 40px">
+            <input matInput type="number" required>
+          </mat-form-field>
+        </ng-template>
+
+        <div fxLayout="row">
+          <div *ngFor="let element of compound.elements">
+            {{element.letter}}
+            <sub *ngIf="element.subscript">{{element.subscript}}</sub>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button mat-button>Submit</button>
+    </div>
+  </form>
+</mat-card>
