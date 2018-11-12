@@ -7,7 +7,7 @@ import { Problem } from './ecuaciones/interfaces/interfacess';
 export class CheckEquationService {
   validateAnswer(problem: Problem, userAnswer: number[]): boolean[] {
     let corrects: boolean[] = [];
-    let formulaStr: string = this.buildEquationString(problem);
+    let formulaStr: string = this.buildFormulaString(problem);
     let solution: number[] = doBalance(formulaStr);
 
     for(var i = 0; i < solution.length; i++) {
@@ -17,40 +17,34 @@ export class CheckEquationService {
     return corrects;
   }
 
-  buildEquationString(problem: Problem): string {
+  private buildFormulaString(problem: Problem): string {
     let formulaStr: string = "";
 
-    let compounds1 = problem.equation1.compounds;
-    for(var i = 0; i < compounds1.length - 1; i++) {
-      for(let element of compounds1[i].elements) {
-        formulaStr += element.letter + element.subscript
-      }
-      formulaStr += " + ";
-    }
-
-    if(compounds1.length > 0) {
-      for(let element of compounds1[compounds1.length-1].elements) {
-        formulaStr += element.letter + element.subscript
-      }
-    }
-
+    formulaStr += this.buildEquationString(problem.equation1);
     formulaStr += " = "
-
-    let compounds2 = problem.equation2.compounds;
-    for(var i = 0; i < compounds2.length - 1; i++) {
-      for(let element of compounds2[i].elements) {
-        formulaStr += element.letter + element.subscript
-      }
-      formulaStr += " + ";
-    }
-
-    if(compounds2.length > 0) {
-      for(let element of compounds2[compounds2.length-1].elements) {
-        formulaStr += element.letter + element.subscript
-      }
-    }
+    formulaStr += this.buildEquationString(problem.equation2);
 
     return formulaStr;
+  }
+
+  private buildEquationString(equation): string {
+    let compounds = equation.compounds;
+    let eqStr: string = "";
+
+    for(var i = 0; i < compounds.length - 1; i++) {
+      for(let element of compounds[i].elements) {
+        eqStr += element.letter + element.subscript
+      }
+      eqStr += " + ";
+    }
+
+    if(compounds.length > 0) {
+      for(let element of compounds[compounds.length-1].elements) {
+        eqStr += element.letter + element.subscript
+      }
+    }
+
+    return eqStr;
   }
 
   constructor() { }
