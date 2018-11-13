@@ -5,14 +5,23 @@
     </mat-form-field>
     <button (click)="phase = 1" mat-button>Siguiente</button>
   </form>
-  <form *ngIf="phase == 1" fxLayout="column" fxLayoutGap="20px">
+  <form *ngIf="phase == 1 && currentProblem" fxLayout="column" fxLayoutGap="20px">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <h2>Puntaje</h2>
+      <div>
+        {{ getScore() }}%
+      </div>
+      <h2>Problema {{this.currentProblemIndex + 1}}</h2>
+    </div>
+
     <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
-      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of game.problems[0].equation1.compounds; index as i; first as isFirstCompound">
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of currentProblem.equation1.compounds; index as i; first as isFirstCompound">
         <div *ngIf="!isFirstCompound"> + </div>
         <div *ngIf="compound.constant; else inputField">{{compound.constant}}</div>
         <ng-template #inputField>
           <mat-form-field fxFlex="0 0 40px">
-            <input matInput type="number" required>
+            <input [(ngModel)]="currentProblemAnswers[getCurrentAnswerIndex(1, i)]" [ngModelOptions]="{standalone: true}"
+              matInput type="number" required>
           </mat-form-field>
         </ng-template>
 
@@ -25,12 +34,13 @@
 
       </div>
       <div>⟶</div>
-      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of game.problems[0].equation2.compounds; index as i; first as isFirstCompound">
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of currentProblem.equation2.compounds; index as i; first as isFirstCompound">
         <div *ngIf="!isFirstCompound"> + </div>
         <div *ngIf="compound.constant; else inputField">{{compound.constant}}</div>
         <ng-template #inputField>
           <mat-form-field fxFlex="0 0 40px">
-            <input matInput type="number" required>
+            <input [(ngModel)]="currentProblemAnswers[getCurrentAnswerIndex(2, i)]" [ngModelOptions]="{standalone: true}"
+              matInput type="number" required>
           </mat-form-field>
         </ng-template>
 
@@ -44,7 +54,13 @@
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center">
-      <button mat-button>Siguiente</button>
+      <button (click)="nextProblem()" mat-button>Siguiente</button>
     </div>
   </form>
+  <div *ngIf="phase === 3" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <h1>Puntaje Total</h1>
+    <div>
+      {{ getScore() }}%
+    </div>
+  </div>
 </mat-card>
