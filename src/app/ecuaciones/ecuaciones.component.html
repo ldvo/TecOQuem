@@ -21,14 +21,14 @@
         <ng-template #inputField>
           <mat-form-field fxFlex="0 0 40px">
             <input [(ngModel)]="currentProblemAnswers[getCurrentAnswerIndex(1, i)]" [ngModelOptions]="{standalone: true}"
-              matInput type="number" required>
+              matInput type="number">
           </mat-form-field>
         </ng-template>
 
         <div fxLayout="row">
           <div *ngFor="let element of compound.elements">
             {{element.letter}}
-            <sub *ngIf="element.subscript">{{element.subscript}}</sub>
+            <sub *ngIf="element.subscript && element.subscript !== 1">{{element.subscript}}</sub>
           </div>
         </div>
 
@@ -40,7 +40,7 @@
         <ng-template #inputField>
           <mat-form-field fxFlex="0 0 40px">
             <input [(ngModel)]="currentProblemAnswers[getCurrentAnswerIndex(2, i)]" [ngModelOptions]="{standalone: true}"
-              matInput type="number" required>
+              matInput type="number">
           </mat-form-field>
         </ng-template>
 

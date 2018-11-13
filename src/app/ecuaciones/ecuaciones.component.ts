@@ -30,7 +30,7 @@ export class EcuacionesComponent implements OnInit {
                 {
                   constant: undefined,
                   elements:
-                      [{letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}]
+                      [{letter: 'H', subscript: 2}, {letter: 'O', subscript: undefined}]
                 }
               ]
         },
@@ -82,7 +82,7 @@ export class EcuacionesComponent implements OnInit {
 
   currentProblem: Problem|undefined;
   currentProblemIndex = 0;
-  currentProblemAnswers: number[];
+  currentProblemAnswers: string[];
   currentAnswerIndex = 0;
   eq1AnswerIndexMap = {};
   eq2AnswerIndexMap = {};
@@ -117,6 +117,7 @@ export class EcuacionesComponent implements OnInit {
                                .length;
     const totalAnswerCount = eq1AnswerCount + eq2AnswerCount;
     this.currentProblemAnswers = new Array(totalAnswerCount);
+    this.currentProblemAnswers.fill(null);
     this.currentProblem = p;
   }
 
@@ -134,8 +135,14 @@ export class EcuacionesComponent implements OnInit {
   }
 
   nextProblem() {
+    const problemAnswers = this.currentProblemAnswers.map((v) => {
+      if (v === null) {
+        return 1;
+      }
+      return Number(v);
+    });
     if (this.checkEquationService.validateAnswer(
-            this.currentProblem, this.currentProblemAnswers)) {
+            this.currentProblem, problemAnswers)) {
       this.totalCorrectAnswers++;
     }
     this.currentProblemIndex++;
