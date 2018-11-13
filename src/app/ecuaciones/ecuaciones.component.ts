@@ -8,6 +8,8 @@ import {Difficulty, Game} from './interfaces/interfacess';
   styleUrls: ['./ecuaciones.component.scss']
 })
 export class EcuacionesComponent implements OnInit {
+  phase = 0;
+  nombre = '';
   game: Game = {
     problems: [{
       difficulty: Difficulty.EASY,

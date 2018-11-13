@@ -1,4 +1,4 @@
-<div style="height: 100vh">
+<div style="height: 100vh" ngClass.xs="xs-layout" ngClass.sm="sm-layout" ngClass.gt-sm="gt-sm-layout">
   <mat-toolbar color="primary" fxLayoutGap="20px" class="mat-elevation-z1">
     <span>TecOQuem</span>
     <div fxFlex fxLayout="row" fxLayoutAlign="end center">
@@ -28,8 +28,11 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content fxFill fxLayout="row" fxLayoutAlign="center stretch">
-      <div fxLayout="column" fxLayoutGap="10%" fxFlex.xs="0 0 90%" fxFlex.gt-xs="0 0 80%" fxFlex.gt-sm="0 0 70%">
-        <router-outlet></router-outlet>
+      <div fxLayout="column" style="padding-top: 10%" fxFlex.xs="0 0 90%" fxFlex.gt-xs="0 0 80%" fxFlex.gt-sm="0 0 70%">
+        <div class="route-container" [@routerTransition]="getState(outlet)">
+
+          <router-outlet #outlet="outlet"></router-outlet>
+        </div>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>

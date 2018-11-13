@@ -8,11 +8,23 @@ import {InicioComponent} from './inicio/inicio.component';
 import {ReaccionesComponent} from './reacciones/reacciones.component';
 
 const routes: Routes = [
-  {path: '', component: InicioComponent},
-  {path: 'reacciones', component: ReaccionesComponent},
-  {path: 'ecuaciones', component: InicioEcuacionesComponent},
-  {path: 'ecuaciones/:gameid', component: EcuacionesComponent},
-  {path: 'acerca', component: AcercaComponent},
+  {path: '', component: InicioComponent, data: {state: 'home'}},
+  {
+    path: 'reacciones',
+    component: ReaccionesComponent,
+    data: {state: 'reacciones'}
+  },
+  {
+    path: 'ecuaciones',
+    component: InicioEcuacionesComponent,
+    data: {state: 'ecuaciones'}
+  },
+  {
+    path: 'ecuaciones/:gameid',
+    component: EcuacionesComponent,
+    data: {state: 'ecuaciones'}
+  },
+  {path: 'acerca', component: AcercaComponent, data: {state: 'acerca'}},
 ];
 
 @NgModule({imports: [RouterModule.forRoot(routes)], exports: [RouterModule]})

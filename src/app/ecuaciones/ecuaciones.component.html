@@ -1,7 +1,12 @@
 <mat-card>
-  <form fxLayout="column" fxLayoutGap="20px">
-    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px" [ngStyle.xs]="{'font-size': '12px'}"
-      [ngStyle.gt-sm]="{'font-size': '20px'}">
+  <form *ngIf="phase == 0" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+    <mat-form-field fxFlex="0 1 auto">
+      <input [(ngModel)]="nombre" name="nombre" matInput placeholder="Nombre" required>
+    </mat-form-field>
+    <button (click)="phase = 1" mat-button>Siguiente</button>
+  </form>
+  <form *ngIf="phase == 1" fxLayout="column" fxLayoutGap="20px">
+    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
       <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of game.problems[0].equation1.compounds; index as i; first as isFirstCompound">
         <div *ngIf="!isFirstCompound"> + </div>
         <div *ngIf="compound.constant; else inputField">{{compound.constant}}</div>
@@ -39,7 +44,7 @@
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center">
-      <button mat-button>Submit</button>
+      <button mat-button>Siguiente</button>
     </div>
   </form>
 </mat-card>
