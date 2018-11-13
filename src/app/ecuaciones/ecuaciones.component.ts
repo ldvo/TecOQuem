@@ -30,17 +30,17 @@ export class EcuacionesComponent implements OnInit {
                 {
                   constant: undefined,
                   elements:
-                      [{letter: 'H', subscript: 2}, {letter: 'O', subscript: undefined}]
+                      [{letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}]
                 }
               ]
         },
         equation2: {
           compounds: [{
-            constant: 4,
+            constant: 1,
             elements:
                 [
-                  {letter: 'H', subscript: 3}, {letter: 'P', subscript: 1},
-                  {letter: 'O', subscript: 4}
+                  {letter: 'H', subscript: 4}, {letter: 'P', subscript: 4},
+                  {letter: 'O', subscript: 12}
                 ]
           }]
         },
@@ -54,10 +54,7 @@ export class EcuacionesComponent implements OnInit {
                 {
                   constant: undefined,
                   elements:
-                      [
-                        {letter: 'H', subscript: 2},
-                        {letter: 'O', subscript: undefined}
-                      ]
+                      [{letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}]
                 },
                 {constant: 2, elements: [{letter: 'N', subscript: 2}]}
               ]
@@ -84,8 +81,8 @@ export class EcuacionesComponent implements OnInit {
   currentProblemIndex = 0;
   currentProblemAnswers: string[];
   currentAnswerIndex = 0;
-  eq1AnswerIndexMap = {};
-  eq2AnswerIndexMap = {};
+  eq1Constants: number[];
+  eq2Constants: number[];
   totalCorrectAnswers = 0;
 
   constructor(private checkEquationService: CheckEquationService) {}
@@ -96,53 +93,27 @@ export class EcuacionesComponent implements OnInit {
 
   setUpProblem(p: Problem) {
     this.currentProblem = undefined;
-    this.currentAnswerIndex = 0;
-    this.eq1AnswerIndexMap = {};
-    this.eq2AnswerIndexMap = {};
-    const eq1AnswerCount = p.equation1.compounds
-                               .filter((c) => {
-                                 if (c.constant === undefined) {
-                                   return true;
-                                 }
-                                 return false;
-                               })
-                               .length;
-    const eq2AnswerCount = p.equation2.compounds
-                               .filter((c) => {
-                                 if (c.constant === undefined) {
-                                   return true;
-                                 }
-                                 return false;
-                               })
-                               .length;
-    const totalAnswerCount = eq1AnswerCount + eq2AnswerCount;
-    this.currentProblemAnswers = new Array(totalAnswerCount);
-    this.currentProblemAnswers.fill(null);
+    this.eq1Constants = p.equation1.compounds.map(c => {
+      return c.constant;
+    });
+    this.eq2Constants = p.equation2.compounds.map(c => {
+      return c.constant;
+    });
     this.currentProblem = p;
   }
 
-  getCurrentAnswerIndex(e: number, i: number) {
-    if (e === 1) {
-      if (this.eq1AnswerIndexMap[i] === undefined) {
-        this.eq1AnswerIndexMap[i] = this.currentAnswerIndex++;
-      }
-      return this.eq1AnswerIndexMap[i];
-    }
-    if (this.eq2AnswerIndexMap[i] === undefined) {
-      this.eq2AnswerIndexMap[i] = this.currentAnswerIndex++;
-    }
-    return this.eq2AnswerIndexMap[i];
-  }
-
   nextProblem() {
-    const problemAnswers = this.currentProblemAnswers.map((v) => {
-      if (v === null) {
-        return 1;
-      }
-      return Number(v);
-    });
-    if (this.checkEquationService.validateAnswer(
-            this.currentProblem, problemAnswers)) {
+    const problemAnswers =
+        this.eq1Constants.concat(this.eq2Constants).map(c => {
+          if (c === null || c === undefined) {
+            return 1;
+          }
+          return c;
+        });
+    if ((this.checkEquationService
+             .validateAnswer(this.currentProblem, problemAnswers)
+             .filter(s => s === true)
+             .length) === problemAnswers.length) {
       this.totalCorrectAnswers++;
     }
     this.currentProblemIndex++;

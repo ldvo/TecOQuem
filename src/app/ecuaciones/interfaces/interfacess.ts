@@ -1,6 +1,6 @@
 interface Element {
   letter: string;
-  subscript: number|undefined;
+  subscript: number;
 }
 
 interface Compound {
