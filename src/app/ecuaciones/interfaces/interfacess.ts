@@ -1,6 +1,6 @@
 interface Element {
   letter: string;
-  subscript: number|undefined;
+  subscript: number;
 }
 
 interface Compound {
@@ -18,7 +18,7 @@ interface Equation {
   compounds: Compound[];
 }
 
-interface Problem {
+export interface Problem {
   equation1: Equation;
   equation2: Equation;
   difficulty: Difficulty;

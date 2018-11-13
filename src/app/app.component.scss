@@ -1,3 +1,39 @@
 .content {
     padding: 25px;
 }
+
+.xs-layout {
+    font-size: 12px;
+    /deep/ h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+    /deep/ h2 {
+        font-size: 16px;
+        text-align: center;
+    }
+}
+
+.sm-layout {
+    font-size: 16px;
+    /deep/ h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+    /deep/ h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+}
+
+.gt-sm-layout {
+    font-size: 16px;
+    /deep/ h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+    /deep/ h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+}
