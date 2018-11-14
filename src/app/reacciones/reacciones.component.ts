@@ -76,15 +76,35 @@ import {trigger, state, transition, animate, style, keyframes} from '@angular/an
 export class ReaccionesComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {}
+  currentProblemIndex = 0;
+  problemStatement: string;
+  problemQuestion: string;
+  availableElements: string[];
+  solution: string;
+  answerState: string;
 
-  answerState = "default";
+  ngOnInit() {
+    this.setUpProblem(this.game.problems[this.currentProblemIndex]);
+  }
 
-  problemStatement = "Completa la reacción de hidrogenación:"
-  problem = [ 'assets/img/problema1.png', undefined ];
+  setUpProblem(problem) {
+    this.answerState = "default";
+    this.problemStatement = problem.problemStatement;
+    this.problemQuestion = problem.problemQuestion;
+    this.availableElements = problem.availableElements;
+    this.solution = problem.solution;
+  }
 
-  availableElements = ['assets/img/problema1-op1.png', 'assets/img/problema1-op2.png', 'assets/img/problema1-op3.png'];
-  solution = 'assets/img/problema1-op2.png';
+  game = {
+    problems: [
+      {
+        problemStatement: "Completa la reacción de hidrogenación:",
+        problemQuestion: [ 'assets/img/problema1.png', undefined ],
+        availableElements: ['assets/img/problema1-op1.png', 'assets/img/problema1-op2.png', 'assets/img/problema1-op3.png'],
+        solution: 'assets/img/problema1-op2.png'
+      }
+    ]
+  }
 
   drop(event) {
     event.preventDefault();
