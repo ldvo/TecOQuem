@@ -1,13 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem, CdkDragExit} from '@angular/cdk/drag-drop';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
-import { forEach } from '@angular/router/src/utils/collection';
+import {trigger, state, transition, animate, style, keyframes} from '@angular/animations'
 
 @Component({
   selector: 'app-reacciones',
@@ -16,19 +8,68 @@ import { forEach } from '@angular/router/src/utils/collection';
   animations: [
     trigger('correctAnswer', [
       state('wrong', style({
-        borderStyle: 'none'
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderColor: 'rgba(256,0,0,0.5)',
+        backgroundColor: 'rgba(256,0,0,0.3)'
+      })),
+      state('anotherWrong', style({
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderColor: 'rgba(256,0,0,0.5)',
+        backgroundColor: 'rgba(256,0,0,0.3)'
       })),
       state('correct', style({
         borderStyle: 'solid',
-        borderColor: 'green',
+        borderWidth: '1px',
+        borderColor: 'rgba(0,256,0,0.5)',
         backgroundColor: 'rgba(0,256,0,0.3)'
       })),
       transition('wrong => correct', [
         animate('1s')
       ]),
-      transition('correct => wrong', [
-        animate('0.5s')
+      transition('default => wrong', [
+        animate('0.25s', keyframes([
+          style({transform: 'translateX(-7%)'}),
+          style({transform: 'translateX(7%)'}),
+          style({transform: 'translateX(-7%)'}),
+          style({transform: 'translateX(7%)'})
+        ])),
+        style({
+          borderStyle: 'solid',
+          borderWidth: '1px',
+          borderColor: 'rgba(256,0,0,0.5)',
+          backgroundColor: 'rgba(256,0,0,0.3)'
+        })
       ]),
+      transition('wrong => anotherWrong', [
+        animate('0.25s', keyframes([
+          style({transform: 'translateX(-7%)'}),
+          style({transform: 'translateX(7%)'}),
+          style({transform: 'translateX(-7%)'}),
+          style({transform: 'translateX(7%)'})
+        ])),
+        style({
+          borderStyle: 'solid',
+          borderWidth: '1px',
+          borderColor: 'rgba(256,0,0,0.5)',
+          backgroundColor: 'rgba(256,0,0,0.3)'
+        })
+      ]),
+      transition('anotherWrong => wrong', [
+        animate('0.25s', keyframes([
+          style({transform: 'translateX(-7%)'}),
+          style({transform: 'translateX(7%)'}),
+          style({transform: 'translateX(-7%)'}),
+          style({transform: 'translateX(7%)'})
+        ])),
+        style({
+          borderStyle: 'solid',
+          borderWidth: '1px',
+          borderColor: 'rgba(256,0,0,0.5)',
+          backgroundColor: 'rgba(256,0,0,0.3)'
+        })
+      ])
     ]),
   ]
 })
@@ -37,54 +78,36 @@ export class ReaccionesComponent implements OnInit {
 
   ngOnInit() {}
 
-  problem = "Construye agua";
+  answerState = "default";
 
-  isCorrect = false;
+  problemStatement = "Completa la reacción de hidrogenación:"
+  problem = [ 'assets/img/problema1.png', undefined ];
 
-  availableElements = [
-    'O',
-    'O',
-    'H',
-    'N',
-    'K'
-  ];
+  availableElements = ['assets/img/problema1-op1.png', 'assets/img/problema1-op2.png', 'assets/img/problema1-op3.png'];
+  solution = 'assets/img/problema1-op2.png';
 
-  selectedElements = [];
-  solution = ['H', 'O', 'O'];
-
-  drop(event: CdkDragDrop<string[]>) {
-    /*if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      if(event.previousContainer.data == this.availableElements) {
-        copyArrayItem(event.previousContainer.data, event.previousContainer.data, event.previousIndex, event.previousIndex);
-        transferArrayItem(event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex);
-      }
-      else {
-        event.previousContainer.data.splice(event.previousIndex, 1);
-      }
-      this.isCorrect = true;
-    }*/
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex);
+  drop(event) {
+    event.preventDefault();
+    var data = event.dataTransfer.getData("draggedElement");
+    console.log(data);
+    var domElement = document.getElementById(data);
+    if(data == this.solution) {
+      event.target.appendChild(domElement);
+      this.answerState = "correct";
     }
-    
-    var sortedSol = this.solution.sort();
-    var sortedAns = this.selectedElements.sort();
-    if(sortedSol.length != sortedAns.length)
-      return;
-    for(var i = 0; i < sortedSol.length; i++) {
-      if(sortedSol[i] != sortedAns[i])
-        return;
+    else {
+      if(this.answerState == "wrong")
+        this.answerState = "anotherWrong";
+      else
+        this.answerState = "wrong";
     }
-    this.isCorrect = true;
+  }
+
+  drag(event) {
+    event.dataTransfer.setData("draggedElement", event.target.id);
+  }
+
+  allowDrop(event) {
+    event.preventDefault();
   }
 }
