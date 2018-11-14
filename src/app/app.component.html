@@ -1,13 +1,17 @@
 <div style="height: 100vh" ngClass.xs="xs-layout" ngClass.sm="sm-layout" ngClass.gt-sm="gt-sm-layout">
-  <mat-toolbar color="primary" fxLayoutGap="20px" class="mat-elevation-z1">
-    <span>TecOQuem</span>
+  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="mat-elevation-z1">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <div style="background-image: url(../assets/chemistry.svg); width: 20px; height: 20px"></div>
+      <div>TecOQuem</div>
+    </div>
+
     <div fxFlex fxLayout="row" fxLayoutAlign="end center">
       <div fxShow="true" fxHide.lt-sm="true" fxLayoutGap="10px">
-        <button routerLink="/" routerLinkActive="mat-accent" [routerLinkActiveOptions]="{exact: true}" mat-button>Inicio</button>
-        <button routerLink="/reacciones" routerLinkActive="mat-accent" mat-button>Reacciones</button>
-        <button routerLink="/ecuaciones" routerLinkActive="mat-accent" mat-button>Balancear
+        <button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" mat-button>Inicio</button>
+        <button routerLink="/reacciones" routerLinkActive="active" mat-button>Reacciones</button>
+        <button routerLink="/ecuaciones" routerLinkActive="active" mat-button>Balancear
           Ecuaciones</button>
-        <button routerLink="/acerca" routerLinkActive="mat-accent" mat-button>Acerca</button>
+        <button routerLink="/acerca" routerLinkActive="active" mat-button>Acerca</button>
       </div>
       <div fxShow="true" fxHide.gt-xs="true">
         <button mat-button (click)="sidenav.toggle()">
@@ -17,17 +21,17 @@
     </div>
   </mat-toolbar>
   <mat-sidenav-container fxFill>
-    <mat-sidenav #sidenav fxFlex fxLayout="column" class="sidebar-container">
+    <mat-sidenav #sidenav fxFlex fxLayout="column" class="sidebar-container" color="primary">
       <div fxLayout="column">
-        <button (click)="sidenav.toggle()" routerLink="/" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="mat-accent"
+        <button (click)="sidenav.toggle()" routerLink="/" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"
           mat-button>Inicio</button>
-        <button (click)="sidenav.toggle()" routerLink="/reacciones" routerLinkActive="mat-accent" mat-button>Reacciones</button>
-        <button (click)="sidenav.toggle()" routerLink="/ecuaciones" routerLinkActive="mat-accent" mat-button>Balancear
+        <button (click)="sidenav.toggle()" routerLink="/reacciones" routerLinkActive="active" mat-button>Reacciones</button>
+        <button (click)="sidenav.toggle()" routerLink="/ecuaciones" routerLinkActive="active" mat-button>Balancear
           Ecuaciones</button>
-        <button (click)="sidenav.toggle()" routerLink="/acerca" routerLinkActive="mat-accent" mat-button>Acerca</button>
+        <button (click)="sidenav.toggle()" routerLink="/acerca" routerLinkActive="active" mat-button>Acerca</button>
       </div>
     </mat-sidenav>
-    <mat-sidenav-content fxFill fxLayout="row" fxLayoutAlign="center stretch">
+    <mat-sidenav-content class="content" fxFill fxLayout="row" fxLayoutAlign="center stretch">
       <div fxLayout="column" style="padding-top: 10%" fxFlex.xs="0 0 90%" fxFlex.gt-xs="0 0 80%" fxFlex.gt-sm="0 0 70%">
         <div class="route-container" [@routerTransition]="getState(outlet)">
 

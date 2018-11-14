@@ -1,5 +1,20 @@
 .content {
-    padding: 25px;
+    /deep/ mat-form-field {
+        min-width: 0;
+        max-width: max-content;
+    }
+    /deep/ h1, /deep/ h2 {
+        color: #3F51B5;
+    }
+}
+
+button {
+    &.active {
+        background-color: #03a9f4;
+    }
+    &.hover {
+        background-color: rgb(52, 66, 148);
+    }
 }
 
 .xs-layout {

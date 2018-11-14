@@ -1,4 +1,20 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/theming';
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+$general-typography: mat-typography-config(
+  $font-family: '"Raleway", sans-serif',
+  $body-2:        mat-typography-level(14px, 24px, 600)  
+);
+
+@include mat-core($general-typography);
+
+$anms-primary: mat-palette($mat-indigo);
+$anms-accent: mat-palette($mat-light-blue);
+$anms-warn: mat-palette($mat-pink, 600);
+
+$custom-theme: mat-light-theme($anms-primary, $anms-accent, $anms-warn);
+
+@include angular-material-theme($custom-theme);
 
 body {
     margin: 0;

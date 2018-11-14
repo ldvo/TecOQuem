@@ -1,9 +1,9 @@
 <mat-card>
   <form *ngIf="phase == 0" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-    <mat-form-field fxFlex="0 1 auto">
-      <input [(ngModel)]="nombre" name="nombre" matInput placeholder="Nombre" required>
+    <mat-form-field fxFlex="1 1 auto">
+      <input fxFlex="0 1 auto" [(ngModel)]="nombre" name="nombre" matInput placeholder="Nombre" required>
     </mat-form-field>
-    <button (click)="phase = 1" mat-button>Siguiente</button>
+    <button (click)="phase = 1" mat-raised-button color="primary">Iniciar</button>
   </form>
   <form *ngIf="phase == 1 && currentProblem" fxLayout="column" fxLayoutGap="20px">
     <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
@@ -14,7 +14,7 @@
       <h2>Problema {{this.currentProblemIndex + 1}}</h2>
     </div>
 
-    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <div *ngIf="!checkSolution" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
       <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of currentProblem.equation1.compounds; index as i; first as isFirstCompound">
         <div *ngIf="!isFirstCompound"> + </div>
         <div *ngIf="compound.constant; else inputField">
@@ -55,8 +55,42 @@
 
       </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <button (click)="nextProblem()" mat-button>Siguiente</button>
+
+    <div *ngIf="checkSolution" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of currentProblem.equation1.compounds; index as i; first as isFirstCompound">
+        <div *ngIf="!isFirstCompound"> + </div>
+        <div [ngStyle]="{'color': eq1CorrectConstants[i] ? 'black' : 'red'}">{{eq1Constants[i]}}</div>
+
+        <div fxLayout="row">
+          <div *ngFor="let element of compound.elements">
+            {{element.letter}}
+            <sub *ngIf="element.subscript && element.subscript !== 1">{{element.subscript}}</sub>
+          </div>
+        </div>
+
+      </div>
+      <div>⟶</div>
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of currentProblem.equation2.compounds; index as i; first as isFirstCompound">
+        <div *ngIf="!isFirstCompound"> + </div>
+        <div [ngStyle]="{'color': eq1CorrectConstants[i] ? 'black' : 'red'}">{{eq2Constants[i]}}</div>
+
+        <div fxLayout="row">
+          <div *ngFor="let element of compound.elements">
+            {{element.letter}}
+            <sub *ngIf="element.subscript">{{element.subscript}}</sub>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="checkSolution" fxLayout="row" fxLayoutAlign="center center">
+      <mat-icon *ngIf="isCorrect" style="color:green">check_circle</mat-icon>
+      <mat-icon *ngIf="!isCorrect" style="color:red">error</mat-icon>
+    </div>
+    <div *ngIf="!checkSolution" fxLayout="row" fxLayoutAlign="center center">
+      <button (click)="checkProblem()" mat-raised-button color="primary">Verificar</button>
+    </div>
+    <div *ngIf="checkSolution" fxLayout="row" fxLayoutAlign="center center">
+      <button (click)="nextProblem()" mat-raised-button color="primary">Siguiente</button>
     </div>
   </form>
   <div *ngIf="phase === 3" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
