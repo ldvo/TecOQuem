@@ -110,6 +110,24 @@ export class ReaccionesComponent implements OnInit {
         problemQuestion: [ 'assets/img/problema2-1.png', undefined,  'assets/img/problema2-2.png'],
         availableElements: ['assets/img/problema2-op1.png', 'assets/img/problema2-op2.png', 'assets/img/problema2-op3.png'],
         solution: 'assets/img/problema2-op3.png'
+      },
+      {
+        problemStatement: "Completa la reacción de síntesis de ésteres:",
+        problemQuestion: [ 'assets/img/problema3-1.png', undefined,  'assets/img/problema3-2.png'],
+        availableElements: ['assets/img/problema3-op1.png', 'assets/img/problema3-op2.png', 'assets/img/problema3-op3.png'],
+        solution: 'assets/img/problema3-op3.png'
+      },
+      {
+        problemStatement: "Completa la reacción de hidrólisis de aníhidridos:",
+        problemQuestion: [ undefined, 'assets/img/problema4.png'],
+        availableElements: ['assets/img/problema4-op1.png', 'assets/img/problema4-op2.png', 'assets/img/problema4-op3.png'],
+        solution: 'assets/img/problema4-op2.png'
+      },
+      {
+        problemStatement: "Completa la reacción de hidrólisis de amidas:",
+        problemQuestion: [ undefined,  'assets/img/problema5.png'],
+        availableElements: ['assets/img/problema5-op1.png', 'assets/img/problema5-op2.png', 'assets/img/problema5-op3.png'],
+        solution: 'assets/img/problema5-op2.png'
       }
     ]
   }
