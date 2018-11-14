@@ -76,6 +76,8 @@ import {trigger, state, transition, animate, style, keyframes} from '@angular/an
 export class ReaccionesComponent implements OnInit {
   constructor() {}
 
+  done = false;
+
   currentProblemIndex = 0;
   problemStatement: string;
   problemQuestion: string;
@@ -102,8 +104,23 @@ export class ReaccionesComponent implements OnInit {
         problemQuestion: [ 'assets/img/problema1.png', undefined ],
         availableElements: ['assets/img/problema1-op1.png', 'assets/img/problema1-op2.png', 'assets/img/problema1-op3.png'],
         solution: 'assets/img/problema1-op2.png'
+      },
+      {
+        problemStatement: "Completa la reacción de adición de amina:",
+        problemQuestion: [ 'assets/img/problema2-1.png', undefined,  'assets/img/problema2-2.png'],
+        availableElements: ['assets/img/problema2-op1.png', 'assets/img/problema2-op2.png', 'assets/img/problema2-op3.png'],
+        solution: 'assets/img/problema2-op3.png'
       }
     ]
+  }
+
+  nextProblem() {
+    this.currentProblemIndex += 1;
+    if(this.currentProblemIndex < this.game.problems.length)
+      this.setUpProblem(this.game.problems[this.currentProblemIndex]);
+    else {
+      this.done = true;
+    }
   }
 
   drop(event) {
