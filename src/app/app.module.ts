@@ -14,6 +14,8 @@ import {InicioEcuacionesComponent} from './ecuaciones/inicio-ecuaciones/inicio-e
 import {InicioComponent} from './inicio/inicio.component';
 import {ReaccionesComponent} from './reacciones/reacciones.component';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [
     AppComponent, InicioComponent, ReaccionesComponent, EcuacionesComponent,
@@ -22,7 +24,7 @@ import {ReaccionesComponent} from './reacciones/reacciones.component';
   imports: [
     FormsModule, MatInputModule, MatFormFieldModule, MatCardModule,
     BrowserModule, BrowserAnimationsModule, AppRoutingModule, MatToolbarModule,
-    FlexLayoutModule, MatSidenavModule, MatButtonModule, MatIconModule
+    FlexLayoutModule, MatSidenavModule, MatButtonModule, MatIconModule, DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

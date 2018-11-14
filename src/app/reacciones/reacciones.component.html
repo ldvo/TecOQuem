@@ -1,3 +1,37 @@
-<p>
-  reacciones works!
-</p>
+<div fxLayout="column" fxLayout.gt-sm="row">
+  <mat-card id="problem">
+      {{problem}}
+  </mat-card>
+</div>
+
+<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
+  <mat-card class="container">
+    <h2>Elementos disponibles</h2>
+  
+    <div
+      cdkDropList
+      #availableElementsList="cdkDropList"
+      [cdkDropListData]="availableElements"
+      [cdkDropListConnectedTo]="[selectedElementsList]"
+      class="list-container"
+      (cdkDropListDropped)="drop($event)"
+      fxLayoutAlign="center center">
+      <mat-card class="ch-element" *ngFor="let item of availableElements" cdkDrag>{{item}}</mat-card>
+    </div>
+  </mat-card>
+  
+  <mat-card class="container" [@correctAnswer]="isCorrect ? 'correct' : 'wrong'">
+    <h2>Reacción</h2>
+  
+    <div
+      cdkDropList
+      #selectedElementsList="cdkDropList"
+      [cdkDropListData]="selectedElements"
+      [cdkDropListConnectedTo]="[availableElementsList]"
+      class="list-container"
+      (cdkDropListDropped)="drop($event)"
+      fxLayoutAlign="center center">
+      <mat-card class="ch-element" *ngFor="let item of selectedElements" cdkDrag>{{item}}</mat-card>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,16 @@
+.container{
+    flex: 1 0 200px;
+    .list-container {
+        .ch-element {
+            width: fit-content;
+            height: fit-content;
+            margin: 10px;
+        }
+        min-height: 100px;
+    }
+    min-height: 100px;
+}
+#problem {
+    flex-grow: 1;
+    margin-bottom: 50px;
+}
