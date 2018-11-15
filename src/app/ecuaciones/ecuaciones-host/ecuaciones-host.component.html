@@ -1,5 +1,23 @@
-<mat-card fxLayout="column">
+<mat-card fxLayout="column" fxLayoutGap="20px">
   <div fxLayout="row" fxLayoutAlign="center center">
     <h1>ID de la Partida: {{idPartida}}</h1>
+  </div>
+  <div fxLayout="column" fxLayoutGap="10px" style="padding:20px">
+    <div fxLayout="row">
+      <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+        <h3>Nombre</h3>
+      </div>
+      <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+        <h3>Puntaje</h3>
+      </div>
+    </div>
+    <div *ngFor="let player of players" fxLayout="row">
+      <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+        {{player.name}}
+      </div>
+      <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+        {{player.score}}%
+      </div>
+    </div>
   </div>
 </mat-card>
