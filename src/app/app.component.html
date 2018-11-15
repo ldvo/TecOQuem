@@ -31,7 +31,7 @@
         <button (click)="sidenav.toggle()" routerLink="/acerca" routerLinkActive="active" mat-button>Acerca</button>
       </div>
     </mat-sidenav>
-    <mat-sidenav-content class="content" fxFill fxLayout="row" fxLayoutAlign="center stretch">
+    <mat-sidenav-content class="content" id="component-content" fxFill fxLayout="row" fxLayoutAlign="center stretch">
       <div fxLayout="column" style="padding-top: 10%" fxFlex.xs="0 0 90%" fxFlex.gt-xs="0 0 80%" fxFlex.gt-sm="0 0 70%">
         <div class="route-container" [@routerTransition]="getState(outlet)">
 
