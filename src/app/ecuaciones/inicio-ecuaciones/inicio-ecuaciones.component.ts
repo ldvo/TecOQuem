@@ -75,12 +75,11 @@ export class InicioEcuacionesComponent implements OnInit {
   };
   constructor(db: AngularFireDatabase, private service: CreategameService) {
 
-    console.log(this.game);
+    // cona/ sole.log(this.game);
 
     // db.object('games/123').set(this.game);
-    service.fetchGame(123).then(val => {
-      console.log(val.val());
-    })
+    this.service.uploadScore(123, 'luis', 0);
+
   }
 
   ngOnInit() {}
