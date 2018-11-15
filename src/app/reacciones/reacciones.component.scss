@@ -1,0 +1,33 @@
+.container{
+    flex: 1 0 200px;
+    min-height: 100px;
+}
+.list-container {
+    .ch-element {
+        width: fit-content;
+        height: fit-content;
+        margin: 10px;
+    }
+    min-height: 100px;
+}
+#problem {
+    flex-grow: 1;
+    margin-bottom: 50px;
+
+    .answer {
+        flex-grow: 1;
+        flex-shrink: 0;
+        width: 200px;
+        height: 200px;
+        min-height: fit-content;
+    }
+    .problem-img {
+        flex-grow: 1;
+        flex-shrink: 0;
+        width: fit-content;
+        height: fit-content;
+    }
+    #next-button {
+        
+    }
+}

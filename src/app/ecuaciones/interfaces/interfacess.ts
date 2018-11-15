@@ -21,8 +21,13 @@ interface Equation {
 export interface Problem {
   equation1: Equation;
   equation2: Equation;
-  difficulty: Difficulty;
+  difficulty: string;
   solution: number[];
+}
+
+export interface Player {
+  name: string;
+  score: number;
 }
 
 export interface Game {

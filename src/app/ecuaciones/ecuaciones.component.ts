@@ -4,6 +4,8 @@ import {CheckEquationService} from '../check-equation.service';
 
 import {Difficulty, Game, Problem} from './interfaces/interfacess';
 
+import { CreategameService } from './../creategame.service';
+
 @Component({
   selector: 'app-ecuaciones',
   templateUrl: './ecuaciones.component.html',
@@ -12,70 +14,72 @@ import {Difficulty, Game, Problem} from './interfaces/interfacess';
 export class EcuacionesComponent implements OnInit {
   phase = 0;
   nombre = '';
-  game: Game = {
-    problems: [
-      {
-        difficulty: Difficulty.EASY,
-        equation1: {
-          compounds:
-              [
-                {
-                  constant: undefined,
-                  elements:
-                      [
-                        {letter: 'P', subscript: 4},
-                        {letter: 'O', subscript: 10}
-                      ]
-                },
-                {
-                  constant: undefined,
-                  elements:
-                      [{letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}]
-                }
-              ]
-        },
-        equation2: {
-          compounds: [{
-            constant: 1,
-            elements:
-                [
-                  {letter: 'H', subscript: 4}, {letter: 'P', subscript: 4},
-                  {letter: 'O', subscript: 12}
-                ]
-          }]
-        },
-        solution: [2, 4]
-      },
-      {
-        difficulty: Difficulty.EASY,
-        equation1: {
-          compounds:
-              [
-                {
-                  constant: undefined,
-                  elements:
-                      [{letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}]
-                },
-                {constant: 2, elements: [{letter: 'N', subscript: 2}]}
-              ]
-        },
-        equation2:
-            {
-              compounds:
-                  [{
-                    constant: 2,
-                    elements:
-                        [
-                          {letter: 'H', subscript: 3},
-                          {letter: 'P', subscript: 1},
-                          {letter: 'O', subscript: 4}
-                        ]
-                  }]
-            },
-        solution: [4]
-      }
-    ]
-  };
+  fetched = false;
+  game: Game;
+  // game: Game = {
+  //   problems: [
+  //     {
+  //       difficulty: "EASY",
+  //       equation1: {
+  //         compounds:
+  //             [
+  //               {
+  //                 constant: undefined,
+  //                 elements:
+  //                     [
+  //                       {letter: 'P', subscript: 4},
+  //                       {letter: 'O', subscript: 10}
+  //                     ]
+  //               },
+  //               {
+  //                 constant: undefined,
+  //                 elements:
+  //                     [{letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}]
+  //               }
+  //             ]
+  //       },
+  //       equation2: {
+  //         compounds: [{
+  //           constant: 1,
+  //           elements:
+  //               [
+  //                 {letter: 'H', subscript: 4}, {letter: 'P', subscript: 4},
+  //                 {letter: 'O', subscript: 12}
+  //               ]
+  //         }]
+  //       },
+  //       solution: [2, 4]
+  //     },
+  //     {
+  //       difficulty: "EASY",
+  //       equation1: {
+  //         compounds:
+  //             [
+  //               {
+  //                 constant: undefined,
+  //                 elements:
+  //                     [{letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}]
+  //               },
+  //               {constant: 2, elements: [{letter: 'N', subscript: 2}]}
+  //             ]
+  //       },
+  //       equation2:
+  //           {
+  //             compounds:
+  //                 [{
+  //                   constant: 2,
+  //                   elements:
+  //                       [
+  //                         {letter: 'H', subscript: 3},
+  //                         {letter: 'P', subscript: 1},
+  //                         {letter: 'O', subscript: 4}
+  //                       ]
+  //                 }]
+  //           },
+  //       solution: [4]
+  //     }
+  //   ]
+  // };
 
   currentProblem: Problem|undefined;
   currentProblemIndex = 0;
@@ -88,11 +92,31 @@ export class EcuacionesComponent implements OnInit {
   eq1CorrectConstants: boolean[];
   eq2CorrectConstants: boolean[];
   isCorrect = false;
+  isLoading = true;
 
-  constructor(private checkEquationService: CheckEquationService) {}
+  constructor(private checkEquationService: CheckEquationService, private service: CreategameService) {
+  
+  }
 
   ngOnInit() {
-    this.setUpProblem(this.game.problems[this.currentProblemIndex]);
+    this.service.fetchGame(123).then(val => {
+      this.game = val.val();
+      this.game.problems.forEach((p) => {
+        p.equation1.compounds.forEach(c => {
+          if (c.constant === -1) {
+            c.constant = undefined;
+          }
+        })
+        p.equation2.compounds.forEach(c => {
+          if (c.constant === -1) {
+            c.constant = undefined;
+          }
+        })
+      })
+      this.setUpProblem(this.game.problems[0]);
+      this.isLoading = false;
+      
+    })
   }
 
   setUpProblem(p: Problem) {
