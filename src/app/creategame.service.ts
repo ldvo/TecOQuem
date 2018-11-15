@@ -49,13 +49,9 @@ To validate if it exists, we return a promise, so you check it like this.
 
   */
 
-  validateGame(id: number) : boolean {
+  validateGame(id: number) : Promise<DataSnapshot> {
 
-    this.db.object('games/' + id).query.once('value');
-
-
-
-    return true;
+    return this.db.object('games/' + id).query.once('value');
   }
 
       // this.service.fetchGame(123).then(val => {
@@ -66,6 +62,10 @@ To validate if it exists, we return a promise, so you check it like this.
 
     return this.db.list('/games/' + id).query.once('value');
 
+  }
+
+  uploadScore(gameId: number, playerName: string, score: number) {
+    this.db.object(`/games/${gameId}/players/${playerName}`).set(score);
   }
 
   increaseCounter(item: number) {
