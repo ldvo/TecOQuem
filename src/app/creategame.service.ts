@@ -18,7 +18,7 @@ export class CreategameService {
           compounds:
               [
                 {
-                  constant: 1,
+                  constant: -1,
                   elements:
                       [
                         {letter: 'P', subscript: 4},
@@ -26,7 +26,7 @@ export class CreategameService {
                       ]
                 },
                 {
-                  constant: 1,
+                  constant: -1,
                   elements:
                       [{letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}]
                 }
@@ -44,7 +44,7 @@ export class CreategameService {
         },
         solution: [2, 4]
       },
-      { // 3
+      { // 2
         difficulty: "EASY",
         equation1: {
           compounds:
@@ -106,7 +106,7 @@ export class CreategameService {
             constant: 1,
             elements:
                 [
-                  {letter: 'c', subscript: 1}, {letter: 'O', subscript: 2}
+                  {letter: 'C', subscript: 1}, {letter: 'O', subscript: 2}
                 ]
           },
         {
