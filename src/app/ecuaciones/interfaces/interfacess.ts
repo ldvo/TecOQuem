@@ -25,6 +25,11 @@ export interface Problem {
   solution: number[];
 }
 
+export interface Player {
+  name: string;
+  score: number;
+}
+
 export interface Game {
   problems: Problem[];
 }

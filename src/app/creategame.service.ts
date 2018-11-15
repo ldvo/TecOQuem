@@ -68,6 +68,10 @@ To validate if it exists, we return a promise, so you check it like this.
     this.db.object(`/games/${gameId}/players/${playerName}`).set(score);
   }
 
+  fetchScores(gameId: number) : Observable<{}> {
+    return this.db.object(`/games/${gameId}/players`).valueChanges();
+  }
+
   increaseCounter(item: number) {
     console.log(item);
       this.db.object('gameId').set(item + 1);
