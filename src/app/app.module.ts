@@ -13,7 +13,7 @@ import {EcuacionesComponent} from './ecuaciones/ecuaciones.component';
 import {InicioEcuacionesComponent} from './ecuaciones/inicio-ecuaciones/inicio-ecuaciones.component';
 import {InicioComponent} from './inicio/inicio.component';
 import {ReaccionesComponent} from './reacciones/reacciones.component';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
@@ -26,9 +26,9 @@ import { environment } from '../environments/environment';
   imports: [
     FormsModule, MatInputModule, MatFormFieldModule, MatCardModule,
     BrowserModule, BrowserAnimationsModule, AppRoutingModule, MatToolbarModule,
-    FlexLayoutModule, MatSidenavModule, MatButtonModule, MatIconModule,
+    FlexLayoutModule, MatSidenavModule, MatButtonModule, MatIconModule, DragDropModule
     AngularFireModule.initializeApp(environment.firebase, 'fcc-book-trading'),
-        AngularFireDatabaseModule
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

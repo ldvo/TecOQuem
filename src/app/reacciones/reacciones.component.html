@@ -1,3 +1,43 @@
-<p>
-  reacciones works!
-</p>
+<div *ngIf="done">
+  <mat-card>
+    <h1>¡Terminaste!</h1>
+  </mat-card>
+</div>
+
+<div *ngIf="!done">
+  <mat-card id="problem">
+    <h2>{{problemStatement}}</h2>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+      <div *ngFor="let problemElement of problemQuestion">
+        <img src="{{problemElement}}" class="problem-img" *ngIf="problemElement !== undefined" draggable="false" />
+        <mat-card class="answer" *ngIf="problemElement === undefined" [@correctAnswer]="answerState">
+          <div (drop)="drop($event)" (dragover)="allowDrop($event)" class="list-container" fxLayoutAlign="center center">
+            <mat-card class="ch-element" *ngFor="let item of selectedElements" draggable="true" (dragstart)="drag($event)"><img
+                src="{{item}}" alt="" draggable="false" /></mat-card>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end">
+      <button (click)="nextProblem()" mat-raised-button id="next-button">Siguiente</button>
+    </div>
+  </mat-card>
+
+  <mat-card class="container">
+    <h2>Arrastra uno de los siguientes compuestos:</h2>
+
+    <div (drop)="drop($event)" (dragover)="allowDrop($event)" class="list-container" fxLayoutAlign="center center">
+      <mat-card class="ch-element" *ngFor="let item of availableElements" draggable="true" (dragstart)="drag($event)"
+        id="{{item}}"><img draggable="false" src="{{item}}" alt="" /></mat-card>
+    </div>
+  </mat-card>
+</div>
+
+
+<!--
+  <mat-card class="container" [@correctAnswer]="isCorrect ? 'correct' : 'wrong'">
+    <h2>Reacción</h2>
+  
+    
+  </mat-card>
+  -->
