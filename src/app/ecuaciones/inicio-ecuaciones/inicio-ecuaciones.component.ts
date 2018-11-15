@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import { AngularFireDatabase  } from 'angularfire2/database';
+import {CreategameService} from './../../creategame.service';
 
 @Component({
   selector: 'app-inicio-ecuaciones',
@@ -6,8 +8,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./inicio-ecuaciones.component.scss']
 })
 export class InicioEcuacionesComponent implements OnInit {
-  idPartida = '';
-  constructor() {}
+  constructor(db: AngularFireDatabase, private service: CreategameService) {}
 
   ngOnInit() {}
 }
