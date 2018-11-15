@@ -1,5 +1,6 @@
 <mat-card>
-  <form *ngIf="phase == 0" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form *ngIf="phase == 0 && !isLoading" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
     <mat-form-field fxFlex="1 1 auto">
       <input fxFlex="0 1 auto" [(ngModel)]="nombre" name="nombre" matInput placeholder="Nombre" required>
     </mat-form-field>
