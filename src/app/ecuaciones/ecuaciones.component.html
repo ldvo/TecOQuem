@@ -14,7 +14,8 @@
       <div>
         {{ getScore() }}%
       </div>
-      <h2>Problema {{this.currentProblemIndex + 1}}</h2>
+      <h2 *ngIf="checkSolution">Problema {{this.currentProblemIndex}}</h2>
+      <h2 *ngIf="!checkSolution">Problema {{this.currentProblemIndex + 1}}</h2>
     </div>
 
     <div *ngIf="!checkSolution" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
@@ -52,7 +53,7 @@
         <div fxLayout="row">
           <div *ngFor="let element of compound.elements">
             {{element.letter}}
-            <sub *ngIf="element.subscript">{{element.subscript}}</sub>
+            <sub *ngIf="element.subscript && element.subscript !== 1">{{element.subscript}}</sub>
           </div>
         </div>
 

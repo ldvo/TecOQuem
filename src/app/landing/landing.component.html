@@ -1,8 +1,10 @@
-<div fxLayout="row">
-    <div id="landing-logo"></div>
-    <h1 class="title">TecOQuem</h1>
+<div fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div id="landing-logo" [ngStyle.xs]="{'width': '60px', 'height': '60px'}" [ngStyle.sm]="{'width': '80px', 'height': '80px'}"
+      [ngStyle.gt-sm]="{'width': '100px', 'height': '100px'}"></div>
+    <h1 class="title" [ngStyle.xs]="{'font-size': '30px'}" [ngStyle.sm]="{'font-size': '50px'}" [ngStyle.gt-sm]="{'font-size': '70px'}">TecOQuem</h1>
+  </div>
+  <p [ngStyle.xs]="{'font-size': '25px'}" [ngStyle.sm]="{'font-size': '33px'}" [ngStyle.gt-sm]="{'font-size': '40px'}">
+    ¡Sumérgete en tu estudio de la química y aprende jugando!
+  </p>
 </div>
-
-<p id="landing-text">
-  ¡Sumérgete en tu estudio de la química y aprende jugando!
-</p>

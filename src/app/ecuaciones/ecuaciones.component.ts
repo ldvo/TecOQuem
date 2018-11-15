@@ -164,13 +164,14 @@ export class EcuacionesComponent implements OnInit {
     } else {
       this.phase = 3;
       this.creategameService.uploadScore(
-          this.gameId, this.nombre, this.getScore());
+          this.gameId, this.nombre, Number(this.getScore()));
     }
   }
 
   getScore() {
     if (this.currentProblemIndex !== 0) {
-      return this.totalCorrectAnswers / this.currentProblemIndex * 100;
+      return (this.totalCorrectAnswers / this.currentProblemIndex * 100)
+          .toFixed(2);
     }
     return 0;
   }
