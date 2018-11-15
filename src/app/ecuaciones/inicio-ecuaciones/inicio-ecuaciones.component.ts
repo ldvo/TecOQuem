@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { AngularFireDatabase  } from 'angularfire2/database';
 import {CreategameService} from './../../creategame.service';
-import {Difficulty, Game, Problem} from './../interfaces/interfacess';
+import {Difficulty, Game, Problem, Player} from './../interfaces/interfacess';
 
 @Component({
   selector: 'app-inicio-ecuaciones',
@@ -9,6 +9,7 @@ import {Difficulty, Game, Problem} from './../interfaces/interfacess';
   styleUrls: ['./inicio-ecuaciones.component.scss']
 })
 export class InicioEcuacionesComponent implements OnInit {
+  players: Player[] = [];
   game: Game = {
     problems: [
       {
@@ -73,14 +74,28 @@ export class InicioEcuacionesComponent implements OnInit {
       }
     ]
   };
+
   constructor(db: AngularFireDatabase, private service: CreategameService) {
 
     // cona/ sole.log(this.game);
 
     // db.object('games/123').set(this.game);
-    this.service.uploadScore(123, 'luis', 0);
+    // this.service.uploadScore(123, 'luis', 0);
+
+    // this.service.fetchScores(123).subscribe((val) => {
+
+    //   for (const key in val) {
+    //     let player : Player = {
+    //       name: key,
+    //       score: val[key]
+    //     }
+    //     this.players.push(player);
+    //   }
+    //   console.log(this.players);
+    // })
 
   }
 
   ngOnInit() {}
+  
 }
