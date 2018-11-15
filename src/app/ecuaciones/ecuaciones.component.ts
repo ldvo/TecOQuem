@@ -101,6 +101,18 @@ export class EcuacionesComponent implements OnInit {
   ngOnInit() {
     this.service.fetchGame(123).then(val => {
       this.game = val.val();
+      this.game.problems.forEach((p) => {
+        p.equation1.compounds.forEach(c => {
+          if (c.constant === -1) {
+            c.constant = undefined;
+          }
+        })
+        p.equation2.compounds.forEach(c => {
+          if (c.constant === -1) {
+            c.constant = undefined;
+          }
+        })
+      })
       this.setUpProblem(this.game.problems[0]);
       this.isLoading = false;
       

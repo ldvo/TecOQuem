@@ -18,7 +18,7 @@
     <div *ngIf="!checkSolution" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
       <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of currentProblem.equation1.compounds; index as i; first as isFirstCompound">
         <div *ngIf="!isFirstCompound"> + </div>
-        <div *ngIf="compound.constant === -1; else inputField">
+        <div *ngIf="compound.constant; else inputField">
           <div *ngIf="compound.constant !== 1">{{compound.constant}}</div>
         </div>
         <ng-template #inputField>
@@ -38,7 +38,7 @@
       <div>⟶</div>
       <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngFor="let compound of currentProblem.equation2.compounds; index as i; first as isFirstCompound">
         <div *ngIf="!isFirstCompound"> + </div>
-        <div *ngIf="compound.constant === -1; else inputField">
+        <div *ngIf="compound.constant; else inputField">
           <div *ngIf="compound.constant !== 1">{{compound.constant}}</div>
         </div>
         <ng-template #inputField>
