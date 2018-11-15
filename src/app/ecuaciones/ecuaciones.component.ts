@@ -84,6 +84,10 @@ export class EcuacionesComponent implements OnInit {
   eq1Constants: number[];
   eq2Constants: number[];
   totalCorrectAnswers = 0;
+  checkSolution = false;
+  eq1CorrectConstants: boolean[];
+  eq2CorrectConstants: boolean[];
+  isCorrect = false;
 
   constructor(private checkEquationService: CheckEquationService) {}
 
@@ -99,10 +103,11 @@ export class EcuacionesComponent implements OnInit {
     this.eq2Constants = p.equation2.compounds.map(c => {
       return c.constant;
     });
+    this.checkSolution = false;
     this.currentProblem = p;
   }
 
-  nextProblem() {
+  checkProblem() {
     const problemAnswers =
         this.eq1Constants.concat(this.eq2Constants).map(c => {
           if (c === null || c === undefined) {
@@ -110,13 +115,23 @@ export class EcuacionesComponent implements OnInit {
           }
           return c;
         });
-    if ((this.checkEquationService
-             .validateAnswer(this.currentProblem, problemAnswers)
-             .filter(s => s === true)
-             .length) === problemAnswers.length) {
+    const correctConstants = this.checkEquationService.validateAnswer(
+        this.currentProblem, problemAnswers);
+    this.eq1CorrectConstants =
+        correctConstants.slice(0, this.eq1Constants.length);
+    this.eq2CorrectConstants = correctConstants.slice(this.eq1Constants.length);
+    if (correctConstants.filter(s => s === true).length ===
+        problemAnswers.length) {
       this.totalCorrectAnswers++;
+      this.isCorrect = true;
+    } else {
+      this.isCorrect = false;
     }
+    this.checkSolution = true;
     this.currentProblemIndex++;
+  }
+
+  nextProblem() {
     if (this.currentProblemIndex < this.game.problems.length) {
       this.setUpProblem(this.game.problems[this.currentProblemIndex]);
     } else {

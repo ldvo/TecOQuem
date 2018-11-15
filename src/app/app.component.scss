@@ -1,5 +1,31 @@
 .content {
-    padding: 25px;
+    /deep/ mat-form-field {
+        min-width: 0;
+        max-width: max-content;
+    }
+    /deep/ h1, /deep/ h2, /deep/ h3, /deep/ h4 {
+        color: #3F51B5;
+    }
+}
+
+button {
+    &.active {
+        background-color: #03a9f4;
+    }
+    &.hover {
+        background-color: rgb(44, 57, 128);
+    }
+}
+
+mat-sidenav {
+    button {
+        &.active {
+            color: white;
+        }
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 0;
+    }
 }
 
 .xs-layout {
