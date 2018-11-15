@@ -10,6 +10,153 @@ import { Game } from './ecuaciones/interfaces/interfacess';
 })
 export class CreategameService {
 
+  game: Game = {
+    problems: [
+      { // 1
+        difficulty: "EASY",
+        equation1: {
+          compounds:
+              [
+                {
+                  constant: 1,
+                  elements:
+                      [
+                        {letter: 'P', subscript: 4},
+                        {letter: 'O', subscript: 10}
+                      ]
+                },
+                {
+                  constant: 1,
+                  elements:
+                      [{letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}]
+                }
+              ]
+        },
+        equation2: {
+          compounds: [{
+            constant: 1,
+            elements:
+                [
+                  {letter: 'H', subscript: 4}, {letter: 'P', subscript: 4},
+                  {letter: 'O', subscript: 12}
+                ]
+          }]
+        },
+        solution: [2, 4]
+      },
+      { // 3
+        difficulty: "EASY",
+        equation1: {
+          compounds:
+              [
+                {
+                  constant: 2,
+                  elements:
+                      [
+                        {letter: 'Fe', subscript: 1},
+                        {letter: 'Cl', subscript: 3}
+                      ]
+                },
+                {
+                  constant: -1,
+                  elements:
+                      [{letter: 'Mg', subscript: 1}, {letter: 'O', subscript: 1}]
+                }
+              ]
+        },
+        equation2: {
+          compounds: [{
+            constant: 1,
+            elements:
+                [
+                  {letter: 'Fe', subscript: 2}, {letter: 'O', subscript: 3}
+                ]
+          },
+        {
+          constant: -1,
+          elements: [
+            {letter: 'Mg', subscript: 1}, {letter: 'Cl', subscript: 2}
+          ]
+        }]
+        },
+        solution: [2, 4]
+      }, // 3
+      {
+        difficulty: "EASY",
+        equation1: {
+          compounds:
+              [
+                {
+                  constant: 1,
+                  elements:
+                      [
+                        {letter: 'C', subscript: 1},
+                        {letter: 'H', subscript: 4}
+                      ]
+                },
+                {
+                  constant: -1,
+                  elements:
+                      [{letter: 'O', subscript: 2},]
+                }
+              ]
+        },
+        equation2: {
+          compounds: [{
+            constant: 1,
+            elements:
+                [
+                  {letter: 'c', subscript: 1}, {letter: 'O', subscript: 2}
+                ]
+          },
+        {
+          constant: -1,
+          elements: [
+            {letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}
+          ]
+        }]
+        },
+        solution: [2, 4]
+      },
+      { // 4
+        difficulty: "EASY",
+        equation1: {
+          compounds:
+              [
+                {
+                  constant: 6,
+                  elements:
+                      [
+                        {letter: 'Li', subscript: 1},
+                      ]
+                },
+                {
+                  constant: -1,
+                  elements:
+                      [{letter: 'H', subscript: 3}, {letter: 'P', subscript: 1}, {letter: 'O', subscript: 4}]
+                }
+              ]
+        },
+        equation2: {
+          compounds: [{
+            constant: -1,
+            elements:
+                [
+                  {letter: 'H', subscript: 2}
+                ]
+          },
+        {
+          constant: 2,
+          elements: [
+            {letter: 'Li', subscript: 3}, {letter: 'P', subscript: 1}, {letter: 'O', subscript: 4}
+          ]
+        }]
+        },
+        solution: [2, 4]
+      }
+    ]
+  };
+
   constructor(private db: AngularFireDatabase) { }
 
       // When thay click create game we should do something like this.
@@ -32,8 +179,7 @@ export class CreategameService {
 
   createGame(id: number) {
     this.db.object('games/' + id).set({
-      problem: 'nuevo problema',
-      solucion: 'solucion perrona'
+      problems: this.game.problems
     })
   }
 
