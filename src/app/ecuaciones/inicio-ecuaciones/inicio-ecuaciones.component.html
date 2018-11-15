@@ -9,12 +9,18 @@
     <mat-form-field fxFlex="0 1 auto">
       <input [(ngModel)]="idPartida" name="idPartida" matInput placeholder="ID de la Partida" required>
     </mat-form-field>
-    <button [routerLink]="'/ecuaciones/' + idPartida" mat-raised-button color="primary">Entrar</button>
+    <button (click)="loadGame()" mat-raised-button color="primary">Entrar</button>
   </form>
+  <div *ngIf="isLoading" fxLayout="row" fxLayoutAlign="center center">
+    <mat-spinner diameter="10"></mat-spinner>
+  </div>
+  <div *ngIf="idNotFound && !isLoading" style="color: red" fxLayout="row" fxLayoutAlign="center center">
+    No se encontro una partida con ese ID.
+  </div>
   <div fxLayout="row">
     <h2>Crear una Partida</h2>
   </div>
   <div fxLayout="row" fxLayoutAlign="center center">
-    <button mat-raised-button color="primary">Crear</button>
+    <button (click)="createGame()" mat-raised-button color="primary">Crear</button>
   </div>
 </mat-card>

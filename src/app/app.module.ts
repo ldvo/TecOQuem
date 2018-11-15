@@ -18,11 +18,12 @@ import {EcuacionesComponent} from './ecuaciones/ecuaciones.component';
 import {InicioEcuacionesComponent} from './ecuaciones/inicio-ecuaciones/inicio-ecuaciones.component';
 import {InicioComponent} from './inicio/inicio.component';
 import {ReaccionesComponent} from './reacciones/reacciones.component';
+import { EcuacionesHostComponent } from './ecuaciones/ecuaciones-host/ecuaciones-host.component';
 
 @NgModule({
   declarations: [
     AppComponent, InicioComponent, ReaccionesComponent, EcuacionesComponent,
-    AcercaComponent, InicioEcuacionesComponent
+    AcercaComponent, InicioEcuacionesComponent, EcuacionesHostComponent
   ],
   imports: [
     FormsModule, MatInputModule, MatFormFieldModule, MatCardModule,

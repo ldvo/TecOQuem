@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 import {CheckEquationService} from '../check-equation.service';
 
+import {CreategameService} from './../creategame.service';
 import {Difficulty, Game, Problem} from './interfaces/interfacess';
-
-import { CreategameService } from './../creategame.service';
 
 @Component({
   selector: 'app-ecuaciones',
@@ -34,7 +34,8 @@ export class EcuacionesComponent implements OnInit {
   //               {
   //                 constant: undefined,
   //                 elements:
-  //                     [{letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}]
+  //                     [{letter: 'H', subscript: 2}, {letter: 'O', subscript:
+  //                     1}]
   //               }
   //             ]
   //       },
@@ -58,7 +59,8 @@ export class EcuacionesComponent implements OnInit {
   //               {
   //                 constant: undefined,
   //                 elements:
-  //                     [{letter: 'H', subscript: 2}, {letter: 'O', subscript: 1}]
+  //                     [{letter: 'H', subscript: 2}, {letter: 'O', subscript:
+  //                     1}]
   //               },
   //               {constant: 2, elements: [{letter: 'N', subscript: 2}]}
   //             ]
@@ -93,30 +95,31 @@ export class EcuacionesComponent implements OnInit {
   eq2CorrectConstants: boolean[];
   isCorrect = false;
   isLoading = true;
+  gameId: number;
 
-  constructor(private checkEquationService: CheckEquationService, private service: CreategameService) {
-  
-  }
+  constructor(
+      private checkEquationService: CheckEquationService,
+      private creategameService: CreategameService, private router: Router) {}
 
   ngOnInit() {
-    this.service.fetchGame(123).then(val => {
+    this.gameId = Number(this.router.url.split('/').pop());
+    this.creategameService.fetchGame(this.gameId).then(val => {
       this.game = val.val();
       this.game.problems.forEach((p) => {
         p.equation1.compounds.forEach(c => {
           if (c.constant === -1) {
             c.constant = undefined;
           }
-        })
+        });
         p.equation2.compounds.forEach(c => {
           if (c.constant === -1) {
             c.constant = undefined;
           }
-        })
-      })
+        });
+      });
       this.setUpProblem(this.game.problems[0]);
       this.isLoading = false;
-      
-    })
+    });
   }
 
   setUpProblem(p: Problem) {
@@ -160,6 +163,8 @@ export class EcuacionesComponent implements OnInit {
       this.setUpProblem(this.game.problems[this.currentProblemIndex]);
     } else {
       this.phase = 3;
+      this.creategameService.uploadScore(
+          this.gameId, this.nombre, this.getScore());
     }
   }
 
