@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AngularFireDatabase} from 'angularfire2/database';
 
 import {CreategameService} from './../../creategame.service';
-import {Difficulty, Game, Problem} from './../interfaces/interfacess';
 
 @Component({
   selector: 'app-inicio-ecuaciones',

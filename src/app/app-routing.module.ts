@@ -7,9 +7,11 @@ import {EcuacionesComponent} from './ecuaciones/ecuaciones.component';
 import {InicioEcuacionesComponent} from './ecuaciones/inicio-ecuaciones/inicio-ecuaciones.component';
 import {InicioComponent} from './inicio/inicio.component';
 import {ReaccionesComponent} from './reacciones/reacciones.component';
+import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
-  {path: '', component: InicioComponent, data: {state: 'home'}},
+  {path: '', component: LandingComponent, data: {state: 'home'}},
+  //{path: 'landing', component: LandingComponent, data: {state: 'landing'}},
   {
     path: 'reacciones',
     component: ReaccionesComponent,
