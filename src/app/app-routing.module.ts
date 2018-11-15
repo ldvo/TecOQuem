@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {AcercaComponent} from './acerca/acerca.component';
+import {EcuacionesHostComponent} from './ecuaciones/ecuaciones-host/ecuaciones-host.component';
 import {EcuacionesComponent} from './ecuaciones/ecuaciones.component';
 import {InicioEcuacionesComponent} from './ecuaciones/inicio-ecuaciones/inicio-ecuaciones.component';
 import {InicioComponent} from './inicio/inicio.component';
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'ecuaciones/:gameid',
     component: EcuacionesComponent,
+    data: {state: 'ecuaciones'}
+  },
+  {
+    path: 'ecuacioneshost/:gameid',
+    component: EcuacionesHostComponent,
     data: {state: 'ecuaciones'}
   },
   {path: 'acerca', component: AcercaComponent, data: {state: 'acerca'}},
