@@ -14,6 +14,10 @@ import {InicioEcuacionesComponent} from './ecuaciones/inicio-ecuaciones/inicio-e
 import {InicioComponent} from './inicio/inicio.component';
 import {ReaccionesComponent} from './reacciones/reacciones.component';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent, InicioComponent, ReaccionesComponent, EcuacionesComponent,
@@ -22,7 +26,9 @@ import {ReaccionesComponent} from './reacciones/reacciones.component';
   imports: [
     FormsModule, MatInputModule, MatFormFieldModule, MatCardModule,
     BrowserModule, BrowserAnimationsModule, AppRoutingModule, MatToolbarModule,
-    FlexLayoutModule, MatSidenavModule, MatButtonModule, MatIconModule
+    FlexLayoutModule, MatSidenavModule, MatButtonModule, MatIconModule,
+    AngularFireModule.initializeApp(environment.firebase, 'fcc-book-trading'),
+        AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
